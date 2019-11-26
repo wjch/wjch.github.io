@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wjch.github.io</id>
+    <id>https://www.wangjiechao.com</id>
     <title>寻寻觅觅</title>
-    <updated>2019-11-26T07:22:25.628Z</updated>
+    <updated>2019-11-26T07:33:45.068Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wjch.github.io"/>
-    <link rel="self" href="https://wjch.github.io/atom.xml"/>
-    <logo>https://wjch.github.io/images/avatar.png</logo>
-    <icon>https://wjch.github.io/favicon.ico</icon>
+    <link rel="alternate" href="https://www.wangjiechao.com"/>
+    <link rel="self" href="https://www.wangjiechao.com/atom.xml"/>
+    <logo>https://www.wangjiechao.com/images/avatar.png</logo>
+    <icon>https://www.wangjiechao.com/favicon.ico</icon>
     <rights>All rights reserved 2019, 寻寻觅觅</rights>
     <entry>
         <title type="html"><![CDATA[es学习总结]]></title>
-        <id>https://wjch.github.io/post/es学习总结</id>
-        <link href="https://wjch.github.io/post/es学习总结">
+        <id>https://www.wangjiechao.com/post/es学习总结</id>
+        <link href="https://www.wangjiechao.com/post/es学习总结">
         </link>
         <updated>2019-06-12T16:00:00.000Z</updated>
         <content type="html"><![CDATA[<h2 id="0️⃣安装">0️⃣.安装😀</h2>
@@ -126,8 +126,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[hadoop搭建和问题解决]]></title>
-        <id>https://wjch.github.io/post/hadoop搭建和问题解决</id>
-        <link href="https://wjch.github.io/post/hadoop搭建和问题解决">
+        <id>https://www.wangjiechao.com/post/hadoop搭建和问题解决</id>
+        <link href="https://www.wangjiechao.com/post/hadoop搭建和问题解决">
         </link>
         <updated>2019-02-13T09:12:27.000Z</updated>
         <content type="html"><![CDATA[<p>1.参考<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html">官方教程</a><br>
@@ -157,8 +157,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[git学习]]></title>
-        <id>https://wjch.github.io/post/git学习</id>
-        <link href="https://wjch.github.io/post/git学习">
+        <id>https://www.wangjiechao.com/post/git学习</id>
+        <link href="https://www.wangjiechao.com/post/git学习">
         </link>
         <updated>2015-11-13T12:06:55.000Z</updated>
         <content type="html"><![CDATA[<h1 id="基本概念">基本概念：</h1>
@@ -220,8 +220,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[你的知识需要管理-读书笔记]]></title>
-        <id>https://wjch.github.io/post/8</id>
-        <link href="https://wjch.github.io/post/8">
+        <id>https://www.wangjiechao.com/post/8</id>
+        <link href="https://www.wangjiechao.com/post/8">
         </link>
         <updated>2015-08-23T05:34:36.000Z</updated>
         <content type="html"><![CDATA[<h3 id="第一节你的知识问题">第一节.你的知识问题</h3>
