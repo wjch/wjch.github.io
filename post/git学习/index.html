@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>git学习 | 寻寻觅觅</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wjch.github.io/favicon.ico?v=1574751546918">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wjch.github.io/styles/main.css">
+
+
+  
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://wjch.github.io">
+        <img class="avatar" src="https://wjch.github.io/images/avatar.png?v=1574751546918" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://wjch.github.io">
+        <h1 class="site-title">寻寻觅觅</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">git学习</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2015-11-13</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://wjch.github.io/tag/git">
+                    git
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="基本概念">基本概念：</h1>
+<h2 id="查看对象类型">查看对象类型</h2>
+<p>git log --pretty=raw --graph e672332</p>
+<p>打印提交对象之间的互相关联的跟踪链，--pragh显示parent属性，没有parent即为起点</p>
+<h2 id="显示当前分支">显示当前分支</h2>
+<p>git branch</p>
+<h2 id="headmaster分支和refsheadsmaster区别">HEAD，master分支，和refs/heads/master区别</h2>
+<p>使用master代表分支master中最新的提交，也可以使用全称refs/heads/master或heads/master</p>
+<p>使用HEAD代表版本库中最近的一次提交</p>
+<p>符号^可以用来只带父提交，如：</p>
+<p>HEAD^代表版本库的上一次提交，即最近一次提交的父提交（即倒数第二次提交）</p>
+<p>HEAD^<sup>代表HEAD</sup>的父提交</p>
+<h2 id="git重置">Git重置</h2>
+<p>git reset可以将游标指向任意一个存在的提交ID</p>
+<p>git reset –hard HEAD^将master重置到上一个老的提交中，此时提交历史也会改变</p>
+<p>使用git reset重置命令很危险，会彻底的丢失历史</p>
+<p>使用Git reflog来挽回错误的重置</p>
+<p>git reflog show master |head -5</p>
+<p>7250a94 master@{0}: HEAD^: updating HEAD</p>
+<p>df208c4 master@{1}: commit: leavewelcome.txt alone</p>
+<p>7250a94 master@{2}: merge 7250a:Fast-forward</p>
+<p>a2d0352 master@{3}: commit: 5th commit</p>
+<p>67fba85 master@{4}: master@{3}: updatingHEAD</p>
+<p>重置master为2次提交之前的值：</p>
+<p>git reset –hard master@{2}</p>
+<h2 id="git检出">git检出</h2>
+<p>git branch -v查看当前分支</p>
+<p>git chackout master切换到master分支上</p>
+<p>git checkout branch检出branch分支</p>
+<p>git merge ac23224将处于分离头指针状态的提交于当前分支合并</p>
+<h1 id="基本操作">基本操作：</h1>
+<h2 id="删除文件">删除文件：</h2>
+<p>git rm ww.txt在版本库的最新提交中删除文件，在历史提交中还在。而直接在工作区删除文件，对暂存区和版本库没有任何影响。</p>
+<h2 id="移动文件">移动文件:</h2>
+<p>直接先使用linux的重命名：mv welcome.txt README</p>
+<p>然后添加即可: git add  -A</p>
+<h2 id="回复删除的文件">回复删除的文件：</h2>
+<p>最简洁实用的语句:git checkout HEAD~1 --   welcome.txt</p>
+<h2 id="选择性添加文件">选择性添加文件:</h2>
+<p>git add -i使用交互式界面添加文件</p>
+<h1 id="文件忽略">文件忽略：</h1>
+<p>.gitignore的作用范围时其所出的目录及其子目录</p>
+<p>Git的文件忽略只是对未入库(untrack)的文件起作用</p>
+<p>Git的忽略语法:</p>
+<p>1.忽略文件中的空行或以#开始的行会被忽略</p>
+<p>2.可以使用通配符，*代表任意多字符，？代表单字符，[abc]代表可选字符范围</p>
+<p>3.如果名称的最前面是一个路径分隔符(/)，表明要忽略的文件在此目录下，而非子目录的文件</p>
+<p>4.如果名称的最后面是一个路径操作符(/),表明要忽略的是一整个目录，同名文件不忽略，否则（即没有/的话）同名的文件和目录都忽略。</p>
+<p>5.在名称的最前面添加一个感叹号（！），代表不忽略</p>
+<p>如：</p>
+<p>*.a   #忽略所有以.a为扩展名的文件</p>
+<p>!lib.a   #但是lib.a文件或目录不要忽略，即使是前面设置了对*.a的忽略</p>
+<p>doc/*.txt  #忽略文件如doc/notes.txt ,但是文件如doc/serve/arch.txt不被忽略</p>
+<p>/TODO  #只忽略此目录下的TODO文件，子目录的TODO文件不被忽略</p>
+<p>build/   #忽略build/目录下所有的文件</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://wjch.github.io/post/8">
+              <h3 class="post-title">
+                下一篇：你的知识需要管理-读书笔记
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+
+        
+          <div id="disqus_thread"></div>
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan"></div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+   | <a class="rss" href="https://wjch.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+
+  
+    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+    <script>
+
+    var options = {
+      shortname: 'mywjch',
+      apikey: '0OailFWyvYeoRXPPOW9m4pxzccTft9hKzgEBV1FiewIxOwYdQOws3iqT9zjiojnW',
+    }
+    if ('') {
+      options.api = ''
+    }
+    var dsqjs = new DisqusJS(options)
+
+    </script>
+  
+
+
+
+
+  </body>
+</html>

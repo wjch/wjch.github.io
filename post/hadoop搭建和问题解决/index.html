@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>关于 | 寻寻觅觅</title>
+<title>hadoop搭建和问题解决 | 寻寻觅觅</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -86,18 +86,58 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">关于</h2>
+          <h2 class="post-title">hadoop搭建和问题解决</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-01-25</span>
+            <span><i class="icon-calendar-outline"></i> 2019-02-13</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://wjch.github.io/tag/hadoop">
+                    hadoop
+                    
+                  </a>
+                
+              </span>
             
           </div>
           <div class="post-content">
-            <p>这是关于的页面，可以在这里向世界介绍你！</p>
+            <p>1.参考<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html">官方教程</a><br>
+可以畅通无阻的部署好hadoop,如果是macos的话，也可以参考<a href="https://zhuanlan.zhihu.com/p/33117305">Mac OS 💡 上搭建 Hadoop 开发环境指南</a></p>
+<p>2.提示 <strong>permission denied</strong> 的话应该考虑是ssh的问题,根据官方文档，可以通过</p>
+<pre><code class="language-shell">  $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  $ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+  $ chmod 0600 ~/.ssh/authorized_keys
+</code></pre>
+<p>解决。<br>
+如果已经新建好了id_rsa,直接执行后面两句就可以了。</p>
+<p>3.开启dfs节点后,伪分布式(Pseudo-Distributed)下，我这里发现http://localhost:50070/ 访问不了，几次尝试和google,终于发现要在 <em>hdfs-site.xml</em> 种添加下面的属性:</p>
+<pre><code class="language-xml">&lt;property&gt;
+  &lt;name&gt;dfs.http.address&lt;/name&gt;
+  &lt;value&gt;0.0.0.0:50070&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+<p>然后重新格式化namenode，启动hadoop，即可访问正常。</p>
+<p>4.在往 <em>core-site.xml</em> 中添加下面的属性时，</p>
+<pre><code class="language-xml">&lt;property&gt;
+ &lt;name&gt;fs.defaultFS&lt;/name&gt;
+ &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+<p>可以将localhost修改为本机ip(macos 命令为 ifconfig),方便局域网其他设备查看。</p>
 
           </div>
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://wjch.github.io/post/git学习">
+              <h3 class="post-title">
+                下一篇：git学习
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       
