@@ -21,7 +21,7 @@
   <link href="https://www.wangjiechao.com/styles/main.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
   <!-- <script src="https://www.wangjiechao.com/media/scripts/jquery.min.js"></script> -->
   <script>hljs.initHighlightingOnLoad();</script>
   
@@ -33,6 +33,14 @@
     gtag('js', new Date());
     gtag('config', 'UA-146129632-1');</script>
   
+  <style>
+  .container .row a{
+      font-weight: 600;
+      text-decoration: none;
+      background: linear-gradient(180deg, transparent 70%, rgba(101, 125, 225, 0.4) 0);
+    }
+    
+    </style>
 
     <meta property="og:description" content="hadoop搭建和问题解决"/>
     <meta property="og:url" content="https://www.wangjiechao.com/post/hadoop搭建和问题解决/"/>
@@ -244,6 +252,7 @@ var dsqjs = new DisqusJS(options)
     <!--Valine 的核心代码库-->
     <script src="/media/scripts/Valine.min.js"></script>
 <!-- <div class="comment"></div> -->
+
 <script>
     new Valine({
         // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
