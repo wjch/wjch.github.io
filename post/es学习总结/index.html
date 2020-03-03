@@ -1,108 +1,105 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
-<title>es学习总结 | 寻寻觅觅</title>
-<meta name="description" content="">
-<meta name="baidu-site-verification" content="BQc7AEKTrB" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://www.wangjiechao.com/favicon.ico?v=1574753600852">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://www.wangjiechao.com/styles/main.css">
-
-
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta name="referrer" content="never">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="kveln">
+  <title>es学习总结 | 寻寻觅觅</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="https://www.wangjiechao.com/media/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!--  <link href="https://www.wangjiechao.com/media/css/all.min.css" rel="stylesheet" type="text/css"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/rss+xml" title="es学习总结 | 寻寻觅觅 » Feed" href="https://www.wangjiechao.com/atom.xml">
+  <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+  <link href="https://www.wangjiechao.com/styles/main.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
+  <!-- <script src="https://www.wangjiechao.com/media/scripts/jquery.min.js"></script> -->
+  <script>hljs.initHighlightingOnLoad();</script>
   
 
-  
-    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css" />
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
+    <meta property="og:description" content="es学习总结"/>
+    <meta property="og:url" content="https://www.wangjiechao.com/post/es学习总结/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="寻寻觅觅"/>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://www.wangjiechao.com">
-        <img class="avatar" src="https://www.wangjiechao.com/images/avatar.png?v=1574753600852" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://www.wangjiechao.com">
-        <h1 class="site-title">寻寻觅觅</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
+  	<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://www.wangjiechao.com">寻寻觅觅</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
           
-          <h2 class="post-title">es学习总结</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-06-13</span>
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/">首页</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/archives">归档</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/tags">标签</a>
+              
+          </li>
+          
+          <li class="nav-item">
+              
+              <a class="nav-link" href="/post/about">关于</a>
+              
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://www.wangjiechao.com/media/images/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+          	<span class="tags">
+          	 
+            <a href="https://www.wangjiechao.com/tag/es/" class="tag">es</a>
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://www.wangjiechao.com/tag/es">
-                    es
-                    
-                  </a>
-                
-              </span>
-            
+        </span>
+            <h1>es学习总结</h1>
+            <span class="meta">
+            	Posted on
+              2019-06-13，7 min read
+            </span>
           </div>
-          <div class="post-content">
-            <h2 id="0️⃣安装">0️⃣.安装😀</h2>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h2 id="0️⃣安装">0️⃣.安装😀</h2>
 <p>官网下载安装即可,注意学习时最好安装公司在用的版本型号.</p>
 <h2 id="1️⃣基本概念">1️⃣.基本概念</h2>
 <p>ES虽然是一个开源的分布式搜索引擎,但是你可以把它当做一个NoSQL的数据存储来使用.它是面向文档的,默认条件下是可扩展的.</p>
@@ -126,7 +123,7 @@
 <h2 id="2️⃣索引更新和删除">2️⃣.索引,更新和删除</h2>
 <h3 id="1索引数据">1.索引数据</h3>
 <h4 id="11-核心的数据类型">1.1 核心的数据类型:</h4>
-<figure data-type="image" tabindex="1"><img src="https://mywjch-1256164332.cos.ap-chengdu.myqcloud.com/%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9E%8B_%E4%BF%AE%E6%94%B9.png" alt="数据类型"></figure>
+<figure data-type="image" tabindex="1"><img src="https://mywjch-1256164332.cos.ap-chengdu.myqcloud.com/%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9E%8B_%E4%BF%AE%E6%94%B9.png" alt="数据类型" loading="lazy"></figure>
 <h4 id="12-预定义字段">1.2 预定义字段</h4>
 <p>预定义的字段都是很实用,而且会经常用到,这里罗列一下:</p>
 <h5 id="如何存储和搜索你的文档">如何存储和搜索你的文档</h5>
@@ -210,83 +207,108 @@
 <p>Deleting Kibana index worked for me (CAUTION: I had a brand new install),</p>
 <p><code>curl -XDELETE http://localhost:9200/.kibana</code></p>
 
-          </div>
-        </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="https://www.wangjiechao.com/post/hadoop搭建和问题解决">
-              <h3 class="post-title">
-                下一篇：hadoop搭建和问题解决
-              </h3>
-            </a>
-          </div>
           
-      </div>
-
-      
+          <p class="next-post">下一篇：
+            <a href="https://www.wangjiechao.com/post/hadoop搭建和问题解决/">
+              <span class="post-title">
+                hadoop搭建和问题解决&rarr;
+              </span>
+            </a>
+          </p>
         
-
-        
-          <div id="disqus_thread"></div>
-        
-      
-
-      <div class="site-footer">
-  <div class="slogan"></div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-   | <a class="rss" href="https://www.wangjiechao.com/atom.xml" target="_blank">RSS</a>
-</div>
-
-
-    </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
+        <div class="comment">
+          
+          
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+<div id="disqus_thread"></div>
+<script>
+var options = {
+  shortname: 'mywjch',
+  apikey: '0OailFWyvYeoRXPPOW9m4pxzccTft9hKzgEBV1FiewIxOwYdQOws3iqT9zjiojnW',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
 </script>
 
-
-
-  
-
-  
-    <script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
-    <script>
-
-    var options = {
-      shortname: 'mywjch',
-      apikey: '0OailFWyvYeoRXPPOW9m4pxzccTft9hKzgEBV1FiewIxOwYdQOws3iqT9zjiojnW',
+          
+        
+        </div>
+      </div>
+    </div>
+  </article>
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+              <li class="list-inline-item">
+              <a href="https://www.wangjiechao.com/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>寻寻觅觅</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://www.wangjiechao.com/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://www.wangjiechao.com/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
     }
-    if ('') {
-      options.api = ''
-    }
-    var dsqjs = new DisqusJS(options)
-
-    </script>
-  
-
-
-
-
+  })(this));</script>
   </body>
 </html>
+
