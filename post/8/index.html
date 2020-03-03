@@ -21,8 +21,17 @@
   <link href="https://www.wangjiechao.com/styles/main.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/highlight.min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <!-- <script src="https://www.wangjiechao.com/media/scripts/jquery.min.js"></script> -->
   <script>hljs.initHighlightingOnLoad();</script>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146129632-1"></script>
+  <script>window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-146129632-1');</script>
   
 
     <meta property="og:description" content="你的知识需要管理-读书笔记"/>
@@ -248,7 +257,10 @@
 这个成本除了金钱之外，最重要的是时间成本。”</p>
 
           
-        <div class="comment">
+        <div id="vcomments"></div>
+  
+        <!-- <div class="comment">
+          
           
           
           
@@ -268,7 +280,7 @@ var dsqjs = new DisqusJS(options)
 
           
         
-        </div>
+        </div> -->
       </div>
     </div>
   </article>
@@ -312,6 +324,7 @@ var dsqjs = new DisqusJS(options)
   <!-- <script src="https://www.wangjiechao.com/media/scripts/bootstrap.bundle.min.js"></script> -->
   <!-- Bootstrap core JavaScript -->
   <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
   <!-- <script src="https://www.wangjiechao.com/media/scripts/clean-blog.min.js"></script> -->
   <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
   <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
@@ -341,6 +354,25 @@ var dsqjs = new DisqusJS(options)
       }
     }
   })(this));</script>
+ <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/media/scripts/Valine.min.js"></script>
+<!-- <div class="comment"></div> -->
+<script>
+    new Valine({
+        // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+        av: AV, 
+        el: '#vcomments',
+	      lang: 'zh-cn',//设置评论语言
+        emoticon_url: 'https://cloud.panjunwen.com/alu',
+  emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+  app_id: 'YUovYvD2Sr4OEd3PBlmCfMHl-gzGzoHsz',
+  app_key: 'JYin2t4mnV8TEKa8W3m6lugP',
+  placeholder: '评论留言'
+    });
+</script>    
   </body>
 </html>
 
