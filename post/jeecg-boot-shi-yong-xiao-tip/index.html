@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-       <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
@@ -9,14 +9,14 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="author" content="kveln">
-  <title>hadoop | 寻寻觅觅</title>
+  <title>jeecg-boot使用小tip | 寻寻觅觅</title>
   <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- <link href="https://www.wangjiechao.com/media/css/bootstrap.min.css" rel="stylesheet"> -->
   <!--  <link href="https://www.wangjiechao.com/media/css/all.min.css" rel="stylesheet" type="text/css"> -->
   <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <link rel="alternate" type="application/rss+xml" title="hadoop | 寻寻觅觅 » Feed" href="https://www.wangjiechao.com/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="jeecg-boot使用小tip | 寻寻觅觅 » Feed" href="https://www.wangjiechao.com/atom.xml">
   <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
   <link href="https://www.wangjiechao.com/styles/main.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -51,6 +51,11 @@
     
     </style>
 
+    <meta property="og:description" content="jeecg-boot使用小tip"/>
+    <meta property="og:url" content="https://www.wangjiechao.com/post/jeecg-boot-shi-yong-xiao-tip/"/>
+    <meta property="og:locale" content="zh-CN"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="寻寻觅觅"/>
   </head>
   <body>
   	<!-- Navigation -->
@@ -92,49 +97,79 @@
       </div>
     </div>
   </nav>
-<!-- Page Header -->
+  <!-- Page Header -->
   <header class="masthead" style="background-image: url('https://www.wangjiechao.com/media/images/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1 class="tag-tl">#hadoop</h1>
+          	<span class="tags">
+          	 
+        </span>
+            <h1>jeecg-boot使用小tip</h1>
+            <span class="meta">
+            	Posted on
+              2020-03-18，1 min read
+            </span>
           </div>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Post Content -->
+  <article>
     <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-       
-        <div class="post-preview">
-          <a href="https://www.wangjiechao.com/post/hadoop搭建和问题解决/">
-            <h2 class="post-title">
-              hadoop搭建和问题解决
-            </h2>
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h4 id="1查看详情界面不允许提交修改">1.查看详情界面不允许提交修改</h4>
+<p><a-model> 组件 加上 <code>:okButtonProps=&quot;{ props: {disabled: disableSubmit} }&quot;</code>属性,data中添加disableSubmit:false 即可</p>
+<h4 id="2a-table-组件中文字溢出">2.a-table 组件中文字溢出</h4>
+<p>在<code>&lt;a-table&gt;</code>增加<br>
+<span slot="ellipsis" slot-scope="text, record"><br>
+<j-ellipsis :value="text"/><br>
+</span></p>
+<p>将对应列增加以下属性<br>
+<code>javascript width:200, //最好设置下宽度 scopedSlots: { customRender: 'ellipsis' },//对应slot</code></p>
+<p>####3.选择项目和人员如果自带的不满足需求可以使用jPopup进行开发.</p>
+
+          
+          <p class="next-post">下一篇：
+            <a href="https://www.wangjiechao.com/post/es学习总结/">
+              <span class="post-title">
+                es学习总结&rarr;
+              </span>
             </a>
-            <h3 class="post-subtitle">
-              
-            </h3>
-          <p class="post-meta">
-             <span class="time">2019-02-13</span>
-             <span>,</span>
-             <span class="post-stats">2 min read</span>
-            </p>
-        </div>
-        <hr>
-        <div class="clearfix">
-        </div>
+          </p>
         
+        <div id="vcomments"></div>
+  
+        <!-- <div class="comment">
+          
+          
+          
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+<div id="disqus_thread"></div>
+<script>
+var options = {
+  shortname: 'mywjch',
+  apikey: '0OailFWyvYeoRXPPOW9m4pxzccTft9hKzgEBV1FiewIxOwYdQOws3iqT9zjiojnW',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+</script>
+
+          
         
-        
+        </div> -->
       </div>
     </div>
-  </div>
-
-  
+  </article>
  <!-- Footer -->
   <footer>
     <div class="container">
@@ -205,5 +240,26 @@
       }
     }
   })(this));</script>
+ <!--载入js，在</body>之前插入即可-->
+    <!--Leancloud 操作库:-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!--Valine 的核心代码库-->
+    <script src="/media/scripts/Valine.min.js"></script>
+<!-- <div class="comment"></div> -->
+
+<script>
+    new Valine({
+        // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+        av: AV, 
+        el: '#vcomments',
+	      lang: 'zh-cn',//设置评论语言
+        emoticon_url: 'https://cloud.panjunwen.com/alu',
+  emoticon_list: ["狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","暗地观察.png"],
+  app_id: 'YUovYvD2Sr4OEd3PBlmCfMHl-gzGzoHsz',
+  app_key: 'JYin2t4mnV8TEKa8W3m6lugP',
+  placeholder: '评论留言'
+    });
+</script>    
   </body>
 </html>
+

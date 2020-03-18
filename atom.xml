@@ -2,13 +2,31 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.wangjiechao.com</id>
     <title>寻寻觅觅</title>
-    <updated>2020-03-03T04:20:13.257Z</updated>
+    <updated>2020-03-18T08:34:25.590Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.wangjiechao.com"/>
     <link rel="self" href="https://www.wangjiechao.com/atom.xml"/>
     <logo>https://www.wangjiechao.com/images/avatar.png</logo>
     <icon>https://www.wangjiechao.com/favicon.ico</icon>
     <rights>All rights reserved 2020, 寻寻觅觅</rights>
+    <entry>
+        <title type="html"><![CDATA[jeecg-boot使用小tip]]></title>
+        <id>https://www.wangjiechao.com/post/jeecg-boot-shi-yong-xiao-tip/</id>
+        <link href="https://www.wangjiechao.com/post/jeecg-boot-shi-yong-xiao-tip/">
+        </link>
+        <updated>2020-03-18T08:27:56.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="1查看详情界面不允许提交修改">1.查看详情界面不允许提交修改</h4>
+<p><a-model> 组件 加上 <code>:okButtonProps=&quot;{ props: {disabled: disableSubmit} }&quot;</code>属性,data中添加disableSubmit:false 即可</p>
+<h4 id="2a-table-组件中文字溢出">2.a-table 组件中文字溢出</h4>
+<p>在<code>&lt;a-table&gt;</code>增加<br>
+<span slot="ellipsis" slot-scope="text, record"><br>
+<j-ellipsis :value="text"/><br>
+</span></p>
+<p>将对应列增加以下属性<br>
+<code>javascript width:200, //最好设置下宽度 scopedSlots: { customRender: 'ellipsis' },//对应slot</code></p>
+<p>####3.选择项目和人员如果自带的不满足需求可以使用jPopup进行开发.</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[es学习总结]]></title>
         <id>https://www.wangjiechao.com/post/es学习总结/</id>
