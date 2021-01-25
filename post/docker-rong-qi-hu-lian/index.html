@@ -1,0 +1,338 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>docker容器互联 - 寻寻觅觅</title>
+<link rel="shortcut icon" href="https://www.wangjiechao.com/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://www.wangjiechao.com/media/css/tailwind.css">
+<link rel="stylesheet" href="https://www.wangjiechao.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="docker容器互联 - 寻寻觅觅 - Atom Feed" href="https://www.wangjiechao.com/atom.xml">
+
+    
+
+  <meta name="description" content="两个容器之间如何互通呢
+要让一个容器连接到另外一个容器，我们可以在容器通过 docker create 或 docker run创建时通过 --link 选项进行配置。
+例如，这里我们创建一个 MySQL 容器，将运行我们 Web 应用的容..." />
+  <meta property="og:title" content="docker容器互联 - 寻寻觅觅">
+  <meta property="og:description" content="两个容器之间如何互通呢
+要让一个容器连接到另外一个容器，我们可以在容器通过 docker create 或 docker run创建时通过 --link 选项进行配置。
+例如，这里我们创建一个 MySQL 容器，将运行我们 Web 应用的容..." />
+  <meta property="og:type" content="articles">
+  <meta property="og:url" content="https://www.wangjiechao.com/post/docker-rong-qi-hu-lian/" />
+  <meta property="og:image" content="https://www.wangjiechao.com/images/avatar.png">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta name="twitter:title" content="docker容器互联 - 寻寻觅觅">
+  <meta name="twitter:description" content="两个容器之间如何互通呢
+要让一个容器连接到另外一个容器，我们可以在容器通过 docker create 或 docker run创建时通过 --link 选项进行配置。
+例如，这里我们创建一个 MySQL 容器，将运行我们 Web 应用的容...">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.wangjiechao.com/post/docker-rong-qi-hu-lian/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+ 
+  
+
+  
+</head>
+
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
+    <a href="https://www.wangjiechao.com" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+      寻寻觅觅
+    </a>
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+          docker容器互联
+        </h1>
+        
+        <div class="mb-8 flex flex-wrap">
+          <div class="text-gray-400 text-sm mr-4">2021-01-25 · 3 min read</div>
+          
+        </div>
+        <div class="markdown mb-8" v-pre>
+          <h3 id="两个容器之间如何互通呢">两个容器之间如何互通呢</h3>
+<p>要让一个容器连接到另外一个容器，我们可以在容器通过 <code>docker create</code> 或 <code>docker run</code>创建时通过 <code>--link</code> 选项进行配置。</p>
+<p>例如，这里我们创建一个 MySQL 容器，将运行我们 Web 应用的容器连接到这个 MySQL 容器上，打通两个容器间的网络，实现它们之间的网络互通。</p>
+<pre><code class="language-bash"> $ docker run -d --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+$ docker run -d --name webapp --link mysql webapp:latest
+</code></pre>
+<p>容器间的网络已经打通，那么我们要如何在 Web 应用中连接到 MySQL 数据库呢？Docker 为容器间连接提供了一种非常友好的方式，我们只需要将容器的网络命名填入到连接地址中，就可以访问需要连接的容器了。</p>
+<p>假设我们在 Web 应用中使用的是 JDBC 进行数据库连接的，我们可以这么填写连接。</p>
+<pre><code>String url = &quot;jdbc:mysql://mysql:3306/webapp&quot;;
+</code></pre>
+<p>在这里，连接地址中的 mysql 就好似我们常见的域名解析，Docker 会将其指向 MySQL 容器的 IP 地址。</p>
+<p>在docker里面我们不再需要关心mysql容器中的地址,映射的事情交给docker处理就好.</p>
+<h3 id="expose-port">expose port</h3>
+<p>我们需要对应的地址和端口去访问对应的服务,Docker 为容器网络增加了一套安全机制，只有容器自身允许的端口，才能被其他容器所访问。</p>
+<p>我们首先查看下容器暴露了哪些端口</p>
+<pre><code class="language-bash">$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                 NAMES
+95507bc88082        mysql:5.7           &quot;docker-entrypoint.s…&quot;   17 seconds ago      Up 16 seconds       3306/tcp, 33060/tcp   mysql
+</code></pre>
+<p>可以看到mysql:5.7这个景象暴露了<code>3306</code>和<code>33060</code>端口,使用TCP协议访问.</p>
+<p>想要暴露其他的端口,使用<code>--expose</code>参数即可,比如我们想暴露 33061和33062端口:</p>
+<pre><code class="language-bash">$  docker run -d --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes --expose 33061 --expose 33062 mysql:5.7
+</code></pre>
+<p>我们在通过<code>docker ps</code>看一下</p>
+<pre><code>$  docker ps 
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                       NAMES
+3c4e645f21d7        mysql:5.7           &quot;docker-entrypoint.s…&quot;   4 seconds ago       Up 3 seconds        3306/tcp, 13306/tcp, 23306/tcp, 33060/tcp   mysql
+</code></pre>
+<p>可以看到docker容器已经将对应的端口暴露出来了,我们可以访问这个端口了.</p>
+<blockquote>
+<p>容器暴露了端口只是类似我们打开了容器的防火墙，具体能不能通过这个端口访问容器中的服务，还需要容器中的应用监听并处理来自这个端口的请求。</p>
+</blockquote>
+<h3 id="alias">alias</h3>
+<p>链接的时候就把容器的名字写死了,就丧失了灵活性和可配置性,如果代码里面写死了另一个名称,这样更改起来就会比较麻烦,docker支持使用alias来让我们摆脱容器名称的限制:</p>
+<pre><code class="language-bash">docker run -d --name webapp --link mysql:database webapp:latest
+</code></pre>
+<p>我们使用 <code>--link &lt;name&gt;:&lt;alias&gt;</code>的形式把mysql容器的别名设置为database,<br>
+上面的语句就可以写成</p>
+<pre><code>String url = &quot;jdbc:mysql://database:3306/webapp&quot;;
+</code></pre>
+
+        </div>
+        <!-- Share to Twitter, Weibo, Telegram -->
+        <div class="flex items-center">
+          <div class="mr-4 flex items-center">
+            <i class="ri-share-forward-line text-gray-500"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
+            <i class="ri-twitter-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
+            <i class="ri-weibo-line"></i>
+          </div>
+          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
+            <i class="ri-telegram-line"></i>
+          </div>
+        </div>
+      </div>
+
+      
+        
+
+        
+          <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script type="application/javascript" src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script type="application/javascript">
+
+var options = {
+  shortname: 'mywjch',
+  apikey: '0OailFWyvYeoRXPPOW9m4pxzccTft9hKzgEBV1FiewIxOwYdQOws3iqT9zjiojnW',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+        
+      
+
+      
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  
+</footer>
+    </div>
+
+    <!-- TOC Container -->
+    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
+      <i class="ri-file-list-line"></i>
+    </div>
+
+    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
+      <div class="flex mb-4 justify-end">
+        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
+          <i class="ri-close-line text-lg"></i>
+        </div>
+      </div>
+      <div class="post-toc-container">
+        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%A4%E4%B8%AA%E5%AE%B9%E5%99%A8%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E4%BA%92%E9%80%9A%E5%91%A2">两个容器之间如何互通呢</a></li>
+<li><a href="#expose-port">expose port</a></li>
+<li><a href="#alias">alias</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
+      <i class="ri-arrow-up-line"></i>
+    </div>
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe. 
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg">
+  </div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+      <div class="pswp__item">
+      </div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter">
+        </div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip">
+        </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://www.wangjiechao.com/media/scripts/main.js"></script>
+  
+  <!-- Code Highlight -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+  <script>
+    //拿到预览框架，也就是上面的html代码
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    //定义图片数组变量
+    var imgitems;
+    /**
+    * 用于显示预览界面
+    * @param index 图片数组下标
+    */
+    function viewImg(index) {
+      //其它选项这里不做过多阐述，详情见官网
+      var pswpoptions = {
+        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+        bgOpacity: 0.7, // 背景透明度，0-1
+        maxSpreadZoom: 3, // 缩放级别，不要太大
+      };
+      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
+      gallery.init()
+    }
+    /**
+    * 用于添加图片点击事件
+    * @param img 图片元素
+    * @param index 所属下标（在imgitems中的位置）
+    */
+    function addImgClick(img, index) {
+      img.onclick = function() {
+        viewImg(index)
+      }
+    }
+    /**
+    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+    * 异步加载图片可在图片元素创建完成后调用此方法
+    */
+    function initImg() {
+      //重置图片数组
+      imgitems = [];
+      //查找class:markdown 下的所有img元素并遍历
+      var imgs = document.querySelectorAll('.markdown img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        //本站相册初始为loading图片，真实图片放在data-src
+        var ds = img.getAttribute("data-src");
+        //创建image对象，用于获取图片宽高
+        var imgtemp = new Image();
+        //判断是否存在data-src
+        if (ds != null && ds.length > 0) {
+          imgtemp.src = ds
+        } else {
+          imgtemp.src = img.src
+        }
+        //判断是否存在缓存
+        if (imgtemp.complete) {
+          var imgobj = {
+            "src": imgtemp.src,
+            "w": imgtemp.width,
+            "h": imgtemp.height,
+          };
+          imgitems[i] = imgobj;
+          addImgClick(img, i);
+        } else {
+          console.log('进来了2')
+          imgtemp.index = i;
+          imgtemp.img = img;
+          imgtemp.onload = function() {
+            var imgobj = {
+              "src": this.src,
+              "w": this.width,
+              "h": this.height,
+            };
+            //不要使用push，因为onload前后顺序会不同
+            imgitems[this.index] = imgobj
+            //添加点击事件
+            addImgClick(this.img, this.index);
+          }
+        }
+      }
+    }
+    //初始化
+    initImg();
+  </script>
+  
+  
+    
+  
+</body>
+
+</html>
