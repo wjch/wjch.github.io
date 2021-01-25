@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.wangjiechao.com</id>
     <title>寻寻觅觅</title>
-    <updated>2021-01-25T07:01:28.659Z</updated>
+    <updated>2021-01-25T07:06:42.493Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.wangjiechao.com"/>
     <link rel="self" href="https://www.wangjiechao.com/atom.xml"/>
@@ -110,7 +110,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <p>要映射端口，我们可以在创建容器时使用 -p 或者是 --publish 选项。</p>
 <pre><code>$ sudo docker run -d --name nginx -p 80:80 -p 443:443 nginx:1.12
 </code></pre>
-<p>使用端口映射选项的格式是 -p <ip>:<host-port>:<container-port>，其中 ip 是宿主操作系统的监听 ip，可以用来控制监听的网卡，默认为 0.0.0.0，也就是监听所有网卡。host-port 和 container-port 分别表示映射到宿主操作系统的端口和容器的端口，这两者是可以不一样的，我们可以将容器的 80 端口映射到宿主操作系统的 8080 端口，传入 -p 8080:80 即可。</p>
+<p>使用端口映射选项的格式是<code>-p &lt;ip&gt;:&lt;host-port&gt;:&lt;container-port&gt;</code>，其中 ip 是宿主操作系统的监听 ip，可以用来控制监听的网卡，默认为 0.0.0.0，也就是监听所有网卡。host-port 和 container-port 分别表示映射到宿主操作系统的端口和容器的端口，这两者是可以不一样的，我们可以将容器的 80 端口映射到宿主操作系统的 8080 端口，传入 -p 8080:80 即可。</p>
+<blockquote>
+<p>容器的参数一般都是 宿主机(不好理解的话,就是操作系统)参数:容器参数.</p>
+</blockquote>
 <p>我们可以在容器列表里看到端口映射的配置。</p>
 <pre><code>$ sudo docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                      NAMES
