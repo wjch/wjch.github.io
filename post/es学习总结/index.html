@@ -49,6 +49,8 @@ ES...">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
  
   
+    <link rel="stylesheet" href="https://www.wangjiechao.com/media/css/prism-atom-dark.css">
+  
 
   
 </head>
@@ -226,6 +228,8 @@ var dsqjs = new DisqusJS(options)
       
 
       
+        <div id="vlaine-comment"></div>
+      
 
       <footer class="py-12 text-center px-4 md:px-0" v-pre>
   
@@ -358,6 +362,11 @@ var dsqjs = new DisqusJS(options)
   
   <!-- Code Highlight -->
   
+    <script src="https://www.wangjiechao.com/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+  
 
   <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
@@ -443,6 +452,23 @@ var dsqjs = new DisqusJS(options)
     //初始化
     initImg();
   </script>
+  
+    <script type="application/javascript" src="https://unpkg.com/valine"></script>
+<script type="application/javascript">
+  new Valine({
+    el: '#vlaine-comment',
+    appId: 'YUovYvD2Sr4OEd3PBlmCfMHl-gzGzoHsz',
+    appKey: 'JYin2t4mnV8TEKa8W3m6lugP',
+    pageSize: 10,
+    notify: true,
+    avatar: 'mp',
+    verify: true,
+    placeholder: '来都来了，不妨评论一下',
+    visitor: true,
+    highlight: true,
+    recordIP: true,
+  })
+</script>
   
   
     
