@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>hadoop搭建和问题解决 | 寻寻觅觅</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://www.wangjiechao.com/favicon.ico?v=1653448827814">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.wangjiechao.com/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://www.wangjiechao.com">寻寻觅觅</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>hadoop搭建和问题解决</h1>
+            <p class="article-meta">
+              2019-02-13
+              
+                <a href="https://www.wangjiechao.com/tag/hadoop/" class="badge warning">
+                  hadoop
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>1.参考<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html">官方教程</a><br>
+可以畅通无阻的部署好hadoop,如果是macos的话，也可以参考<a href="https://zhuanlan.zhihu.com/p/33117305">Mac OS 💡 上搭建 Hadoop 开发环境指南</a></p>
+<p>2.提示 <strong>permission denied</strong> 的话应该考虑是ssh的问题,根据官方文档，可以通过</p>
+<pre><code class="language-shell">  $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  $ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+  $ chmod 0600 ~/.ssh/authorized_keys
+</code></pre>
+<p>解决。<br>
+如果已经新建好了id_rsa,直接执行后面两句就可以了。</p>
+<p>3.开启dfs节点后,伪分布式(Pseudo-Distributed)下，我这里发现http://localhost:50070/ 访问不了，几次尝试和google,终于发现要在 <em>hdfs-site.xml</em> 种添加下面的属性:</p>
+<pre><code class="language-xml">&lt;property&gt;
+  &lt;name&gt;dfs.http.address&lt;/name&gt;
+  &lt;value&gt;0.0.0.0:50070&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+<p>然后重新格式化namenode，启动hadoop，即可访问正常。</p>
+<p>4.在往 <em>core-site.xml</em> 中添加下面的属性时，</p>
+<pre><code class="language-xml">&lt;property&gt;
+ &lt;name&gt;fs.defaultFS&lt;/name&gt;
+ &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+<p>可以将localhost修改为本机ip(macos 命令为 ifconfig),方便局域网其他设备查看。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://www.wangjiechao.com/post/git学习/">
+                <h3 class="post-title">
+                  git学习
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://www.wangjiechao.com/images/avatar.png?v=1653448827814" class="no-responsive avatar">
+    <div class="text-muted"></div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/eye-see-see/">眼科就医日记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/yan-ke-jiu-yi-ri-ji/">眼科就医日记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/antd-vue-shi-yong-fen-xiang/">antd vue 使用 分享</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/docker-rong-qi-hu-lian/">docker容器互联和端口映射</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/jeecg-boot-shi-yong-xiao-tip/">jeecg-boot使用小tip</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/es学习总结/">es学习总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/hadoop搭建和问题解决/">hadoop搭建和问题解决</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/git学习/">git学习</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/8/">你的知识需要管理-读书笔记</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://www.wangjiechao.com/tag/sheng-huo/" class="badge secondary">
+          生活
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/es/" class="badge secondary">
+          es
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/hadoop/" class="badge ">
+          hadoop
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/git/" class="badge warning">
+          git
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/du-shu-bi-ji/" class="badge warning">
+          读书笔记
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+     | <a class="rss" href="https://www.wangjiechao.com/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

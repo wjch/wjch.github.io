@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>es学习总结 | 寻寻觅觅</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://www.wangjiechao.com/favicon.ico?v=1653448827814">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.wangjiechao.com/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://www.wangjiechao.com">寻寻觅觅</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>es学习总结</h1>
+            <p class="article-meta">
+              2019-06-13
+              
+                <a href="https://www.wangjiechao.com/tag/es/" class="badge secondary">
+                  es
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="0️⃣安装">0️⃣.安装😀</h2>
+<p>官网下载安装即可,注意学习时最好安装公司在用的版本型号.</p>
+<h2 id="1️⃣基本概念">1️⃣.基本概念</h2>
+<p>ES虽然是一个开源的分布式搜索引擎,但是你可以把它当做一个NoSQL的数据存储来使用.它是面向文档的,默认条件下是可扩展的.</p>
+<h3 id="逻辑设计">逻辑设计</h3>
+<h4 id="文档">文档</h4>
+<p>ES中 搜索和存储的最小单位就是文档(document),毕竟ES中所存的数据很灵活,一般是JSON字符,个人认为完全可以把它当成&quot;文档&quot;;一篇文档同时包含字段和对应的值,而且文档中还可以包含新的文档;</p>
+<p>ES中的文档不像SQL那样,具有严格的模式限制,ES中的文档是无模式的,也就数说并非所有的文档都需要拥有相同的字段,他们并不是受限于同一个模式.</p>
+<p>虽然可以随意添加和忽略字段,但是每个字段的类型都很重要,毕竟字符串字段的类型你不能存储的时候存成整型类型,所以ES 中还有一个放置字段和字段类型映射的地方,和SQL中的表结构的概念相似,这种映射就叫做类型映射.</p>
+<h4 id="类型">类型</h4>
+<p>类型是文档的逻辑容器,类易于表示行的容器. 每个类型中字段的定义叫做映射.</p>
+<p>映射包含某个类型中当前索引的所有文档的所有字段,但是并不是所有的文档必须要有所有的字段,</p>
+<p>如果新近索引的文档又有一个映射中上不存在的字段,elasticsearch会自动的将新字段加入映射,加入的时候还会&quot;猜测&quot;这个字段是什么类型,假如值是7,es会猜测他是长整型.</p>
+<p>​		<code>下了最新的ES学习时,发现ES的最新版本7.*之后已经不支持Type了,搜索时就只有一个_doc返回.</code></p>
+<h4 id="索引">索引</h4>
+<p>索引是映射类型的容器,作为存放大量文档集合的地方,类似于SQL中的数据库 .每个索引存储在硬盘上的同组文件中,</p>
+<h3 id="逻辑设计-2">逻辑设计</h3>
+<h4 id="节点">节点</h4>
+<p>一个节点就是一个运行中的ES实例.在服务器上启动ES后,你就拥有了一个节点.如果在另一台服务器启动ES,那就是另一个节点.甚至可以通过启动多个进程(修改端口),在同一服务器上拥有多个节点.  多个节点可以同时加入同一个集群.对于使用ES的应用程序,集群中有一个还是多个节点都是透明的.默认情况下,可以连接集群中的任一节点并在这个节点中访问到集群中完整的数据集,就好像这个集群中就只有这一个节点.</p>
+<h4 id="主分片和副本分片">主分片和副本分片</h4>
+<p>一个主分片就是一个索引,每个主分片都会有一个副本分片.</p>
+<h2 id="2️⃣索引更新和删除">2️⃣.索引,更新和删除</h2>
+<h3 id="1索引数据">1.索引数据</h3>
+<h4 id="11-核心的数据类型">1.1 核心的数据类型:</h4>
+<figure data-type="image" tabindex="1"><img src="https://mywjch-1256164332.cos.ap-chengdu.myqcloud.com/%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9E%8B_%E4%BF%AE%E6%94%B9.png" alt="数据类型" loading="lazy"></figure>
+<h4 id="12-预定义字段">1.2 预定义字段</h4>
+<p>预定义的字段都是很实用,而且会经常用到,这里罗列一下:</p>
+<h5 id="如何存储和搜索你的文档">如何存储和搜索你的文档</h5>
+<p>①存储原有内容的_source</p>
+<p>​	_source字段会按照原有格式来存储原有的文档.   类似于你点击链接,进来这篇博文,看到了文章的所有信息.</p>
+<p>②仅仅返回源文档的某些字段</p>
+<p>​	可以在stored_fields参数中提供用逗号隔开的字段列表,比如</p>
+<pre><code class="language-bash">curl -XGET get-together/group/1?stored_fields=name
+</code></pre>
+<p>③索引一切的_all</p>
+<p>如果总是在特定的字段上搜索,可以通过设置enabled为false来关闭_all:</p>
+<pre><code class="language-bash">&quot;events&quot;:{
+	&quot;all&quot;:{&quot;enabled&quot;:false}
+}
+</code></pre>
+<h5 id="识别文档">识别文档</h5>
+<p>文档是通过_uid来唯一识别的,ES 内部使用 _uid 来唯一确定文档的身份.</p>
+<p>_uid是由 _id和 _type组成,当搜索或者检索文档时总能获得这两项信息.</p>
+<p>下面是这几个字段的相关信息:</p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>是否存储</th>
+<th>是否索引</th>
+<th style="text-align:left">详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_uid</td>
+<td>yes</td>
+<td>yes</td>
+<td style="text-align:left">用于识别整个索引中的某篇文档</td>
+</tr>
+<tr>
+<td>_id</td>
+<td>NO</td>
+<td>NO</td>
+<td style="text-align:left">该字段没有被索引,也没有被存储,如果搜索它,实际上使用的是_uid.当你获得了结果,同样是从 _uid中抽取内容</td>
+</tr>
+<tr>
+<td>_type</td>
+<td>NO</td>
+<td>not_analyzed</td>
+<td style="text-align:left">该字段是被索引的,并且也生成了单一的词条.ES用它来过滤指定类型的文档,也可以搜索这个字段.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2更新文档">2.更新文档</h3>
+<p>可以参考此文章</p>
+<p><a href="https://www.cnblogs.com/xing901022/p/5330778.html" class="LinkCard">Elasticsearch增删改查 之 —— Update更新</a></p>
+<h3 id="3删除数据">3.删除数据</h3>
+<p>①删除单个文档</p>
+<p>发送HTTP <code>DELETE </code> 请求即可删除单一的文档:</p>
+<pre><code class="language-bash">curl -XDELETE 'localhost:9200/online-shop/shirts/1'
+</code></pre>
+<p>为了 防止文档被删除后,也就不复存在了,但是一个更新操作机会重新创建该文档,尽管这是不允许发生的.毕竟我们希望这个数据永远的消失掉.为了避免这种问题,ES将会在一段时间内保留这篇文档的版本号,这样他就可以拒绝版本比删除操作更低的更新操作了.默认情况下这个时间是60秒.</p>
+<p>②</p>
+<p>③删除索引</p>
+<p>就跟删除文档一样,删除索引需要下面的操作:</p>
+<pre><code class="language-bash">curl -XDELETE 'localhost:9200/online-shop/'
+</code></pre>
+<p>通过提供以逗号隔开的列表,还可以删除多个索引.如果将索引名修改为<code>_all</code>,就可以删除掉所有的索引哦.</p>
+<p>为了防止我们这样误操作,可以在elasticsearch.yml中的action.destructive_require_name:true 来预防这种情况对的发生,这会使ES在删除的时候拒绝_all参数,以及索引名称中的通配符.</p>
+<p>删除索引是很快的,因为它基本上就是移除了和索引分片相关的文件.</p>
+<p>④关闭索引</p>
+<p>除了删除索引,还可以选择关闭索引.如果关闭了索引,就无法通过ES来读取和写入其中的数据,直到它再次打开.当使用应用日志这样的流式数据时,这样的操作非常实用.因为在现实世界中,应用日志最好永久的保存,以防要查看很久以前的信息,我们可能暂时不需要这些数据,但是也不想删除他它们.</p>
+<p>为了关闭索引,我们可以这么做</p>
+<pre><code class="language-bash">curl -XPOST 'localhost:9200/online-shop/_close'
+</code></pre>
+<p>打开的话,那就执行</p>
+<pre><code class="language-bash">curl -XPOST 'localhost:9200/online-shop/_open'
+</code></pre>
+<h2 id="3️⃣搜索操作">3️⃣.搜索操作</h2>
+<h2 id="4️⃣分析数据">4️⃣.分析数据</h2>
+<h2 id="5️⃣遇到的错误">5️⃣遇到的错误</h2>
+<ol>
+<li>Kibana 启动出错: Your Kibana index is out of date, reset it or use the 💡-Pack upgrade assistant</li>
+</ol>
+<p>Deleting Kibana index worked for me (CAUTION: I had a brand new install),</p>
+<p><code>curl -XDELETE http://localhost:9200/.kibana</code></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://www.wangjiechao.com/post/hadoop搭建和问题解决/">
+                <h3 class="post-title">
+                  hadoop搭建和问题解决
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://www.wangjiechao.com/images/avatar.png?v=1653448827814" class="no-responsive avatar">
+    <div class="text-muted"></div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/eye-see-see/">眼科就医日记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/yan-ke-jiu-yi-ri-ji/">眼科就医日记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/antd-vue-shi-yong-fen-xiang/">antd vue 使用 分享</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/docker-rong-qi-hu-lian/">docker容器互联和端口映射</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/jeecg-boot-shi-yong-xiao-tip/">jeecg-boot使用小tip</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/es学习总结/">es学习总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/hadoop搭建和问题解决/">hadoop搭建和问题解决</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/git学习/">git学习</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.wangjiechao.com/post/8/">你的知识需要管理-读书笔记</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://www.wangjiechao.com/tag/sheng-huo/" class="badge ">
+          生活
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/es/" class="badge success">
+          es
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/hadoop/" class="badge warning">
+          hadoop
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/git/" class="badge secondary">
+          git
+        </a>
+      
+        <a href="https://www.wangjiechao.com/tag/du-shu-bi-ji/" class="badge secondary">
+          读书笔记
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+     | <a class="rss" href="https://www.wangjiechao.com/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
